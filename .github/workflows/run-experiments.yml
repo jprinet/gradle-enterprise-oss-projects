@@ -7,6 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.GRADLE_ENTERPRISE_ACCESS_KEY }}
+    strategy:
+      matrix:
+        include:
+          - project: 'gradle-build-scan-quickstart'
+            repositoryUrl: 'https://github.com/gradle/gradle-build-scan-quickstart'
+            branch: 'master'
+            task: 'build'
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -21,6 +28,16 @@ jobs:
           unzip -q -o gradle-enterprise-gradle-build-validation-1.0.zip
       - uses: ./.github/actions/exp1
         with:
-          repositoryUrl: 'https://github.com/gradle/gradle-build-scan-quickstart'
-          branch: 'master'
-          task: 'build'
+          repositoryUrl: ${{ matrix.repositoryUrl }}
+          branch: ${{ matrix.branch }}
+          task: ${{ matrix.task }}
+      - uses: ./.github/actions/exp2
+        with:
+          repositoryUrl: ${{ matrix.repositoryUrl }}
+          branch: ${{ matrix.branch }}
+          task: ${{ matrix.task }}
+      - uses: ./.github/actions/exp3
+        with:
+          repositoryUrl: ${{ matrix.repositoryUrl }}
+          branch: ${{ matrix.branch }}
+          task: ${{ matrix.task }}
