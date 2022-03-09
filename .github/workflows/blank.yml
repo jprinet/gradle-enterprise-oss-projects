@@ -1,9 +1,6 @@
 name: Run experiments manually
 
 on:
-    repository_dispatch:
-        schedule:
-            - cron: '5 12 * * 0'
     workflow_dispatch:
         inputs:
             name:
