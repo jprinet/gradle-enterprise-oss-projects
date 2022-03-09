@@ -1,4 +1,4 @@
-name: Run experiments manually
+name: Run experiments manually bis
 
 on:
     workflow_dispatch:
