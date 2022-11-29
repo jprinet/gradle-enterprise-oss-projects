@@ -9,8 +9,8 @@ on:
 
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
-  GIT_REPO: "https://github.com/micronaut-projects/micronaut-core"
-  GIT_BRANCH: "3.3.x"
+  GIT_REPO: "https://github.com/jprinet/micronaut-core"
+  GIT_BRANCH: "3.4.x"
   TASKS: "check"
   ARGS: "-x:http-server-netty:test"
 
