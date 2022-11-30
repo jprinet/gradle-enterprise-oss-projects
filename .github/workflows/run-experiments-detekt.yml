@@ -9,7 +9,7 @@ on:
 
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
-  GIT_REPO: "https://github.com/detekt/detekt"
+  GIT_REPO: "https://github.com/jprinet/detekt"
   TASKS: "build -x detekt"
 
 jobs:
@@ -18,8 +18,8 @@ jobs:
     strategy:
       matrix:
         include:
-          - experimentId: 1
-          - experimentId: 2
+#          - experimentId: 1
+#          - experimentId: 2
           - experimentId: 3
 
     runs-on: ubuntu-latest
@@ -58,6 +58,7 @@ jobs:
           GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
+          gitBranch: "fix/gradle_deprecation_warnings_2"
           tasks: ${{ env.TASKS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
           failIfNotFullyCacheable: false
