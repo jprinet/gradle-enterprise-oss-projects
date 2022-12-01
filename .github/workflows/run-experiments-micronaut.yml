@@ -12,7 +12,7 @@ env:
   GIT_REPO: "https://github.com/jprinet/micronaut-core"
 #  GIT_BRANCH: "3.4.x"
   TASKS: "check"
-  ARGS: "-x:http-server-netty:test -x :detekt-cli:runWithArgsFile --no-configuration-cache"
+  ARGS: "-x:http-server-netty:test"
 
 jobs:
   Experiment:
