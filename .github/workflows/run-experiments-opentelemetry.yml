@@ -9,8 +9,8 @@ on:
 
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
-  GIT_REPO: "https://github.com/jprinet/opentelemetry-java-instrumentation"
-  TASKS: "assemble"
+  GIT_REPO: "https://github.com/open-telemetry/opentelemetry-java-instrumentation"
+  TASKS: "assemble -x javadoc"
 
 jobs:
   Experiment:
@@ -19,7 +19,7 @@ jobs:
       matrix:
         include:
 #          - experimentId: 1
-          - experimentId: 2
+#          - experimentId: 2
           - experimentId: 3
 
     runs-on: ubuntu-latest
@@ -62,3 +62,4 @@ jobs:
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
           failIfNotFullyCacheable: false
         if: matrix.experimentId == 3
+
