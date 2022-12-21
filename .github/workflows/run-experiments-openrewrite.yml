@@ -22,15 +22,15 @@ jobs:
           - experimentId: 2
           - experimentId: 3
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
-      - name: Set up JDK 11
+      - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
-          java-version: 11
-          distribution: "temurin"
+          java-version: 17
+          distribution: "zulu"
       - name: Download latest version of the validation scripts
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@actions-stable
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@e7ea70774c30e8ae38afd5d8183eb24bc214869d
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run experiment 1
