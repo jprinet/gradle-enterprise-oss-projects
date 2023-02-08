@@ -11,7 +11,7 @@ env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/jprinet/detekt"
   GIT_BRANCH: "main"
-  TASKS: "build -x detekt -x :detekt-cli:runWithArgsFile"
+  TASKS: "build -x detekt"
 
 jobs:
   Experiment:
