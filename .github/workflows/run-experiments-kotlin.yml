@@ -40,7 +40,6 @@ jobs:
       - name: Display toolchain
         run: |
           touch settings.gradle
-          ls -la /opt/hostedtoolcache/jdk
           gradle -q javaToolchains ${{ env.ARGS }}
         shell: bash
       - name: Download latest version of the validation scripts
