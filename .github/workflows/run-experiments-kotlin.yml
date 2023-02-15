@@ -5,8 +5,8 @@ on:
 
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
-  GIT_REPO: "https://github.com/gradle/kotlin"
-  GIT_BRANCH: "solutions/no_verification_metadata"
+  GIT_REPO: "https://github.com/JetBrains/kotlin"
+  GIT_OPTIONS: "--depth 1 -c core.hookspath=../git-hooks"
   TASKS: "install"
   ARGS: "-Pkotlin.test.maxParallelForks=4"
 
@@ -42,6 +42,13 @@ jobs:
           touch settings.gradle
           gradle -q javaToolchains ${{ env.ARGS }}
         shell: bash
+      - name: Create git hook to disable verification metadata
+        run: |
+          mkdir git-hooks
+          echo "#! /bin/bash\nrm -f gradle/verification-metadata.xml" > git-hooks/post-checkout
+          chmod +x git-hooks/post-checkout
+          cat git-hooks/post-checkout
+          pwd
       - name: Download latest version of the validation scripts
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@actions-stable
         with:
@@ -52,7 +59,7 @@ jobs:
           GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
-          gitBranch: ${{ env.GIT_BRANCH }}
+          gitOptions: ${{ env.GIT_OPTIONS }}
           tasks: ${{ env.TASKS }}
           args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
@@ -63,7 +70,7 @@ jobs:
           GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
-          gitBranch: ${{ env.GIT_BRANCH }}
+          gitOptions: ${{ env.GIT_OPTIONS }}          
           tasks: ${{ env.TASKS }}
           args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
@@ -75,7 +82,7 @@ jobs:
           GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
-          gitBranch: ${{ env.GIT_BRANCH }}
+          gitOptions: ${{ env.GIT_OPTIONS }}
           tasks: ${{ env.TASKS }}
           args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
