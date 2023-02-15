@@ -57,7 +57,7 @@ jobs:
           GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
-          gitBranch: "fix/deprecation_warnings"
+          gitBranch: ${{ env.GIT_BRANCH }}
           tasks: ${{ env.TASKS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
           failIfNotFullyCacheable: false
