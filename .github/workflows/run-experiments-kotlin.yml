@@ -6,7 +6,7 @@ on:
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/JetBrains/kotlin"
-  GIT_OPTIONS: "--depth 1 -c core.hookspath=../git-hooks"
+  GIT_OPTIONS: "--depth 1"
   TASKS: "install"
   ARGS: "-Pkotlin.test.maxParallelForks=4"
 
@@ -45,10 +45,10 @@ jobs:
       - name: Create git hook to disable verification metadata
         run: |
           mkdir git-hooks
-          echo "#! /bin/bash\nrm -f gradle/verification-metadata.xml" > git-hooks/post-checkout
+          echo -e "#!/bin/bash\nrm -f gradle/verification-metadata.xml\n" > git-hooks/post-checkout
           chmod +x git-hooks/post-checkout
           cat git-hooks/post-checkout
-          pwd
+          git config --global core.hooksPath ./git-hooks
       - name: Download latest version of the validation scripts
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@actions-stable
         with:
