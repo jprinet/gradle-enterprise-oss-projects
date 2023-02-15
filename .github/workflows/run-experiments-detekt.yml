@@ -7,7 +7,7 @@ env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/jprinet/detekt"
   GIT_BRANCH: "fix/circular_dependencies"
-  TASKS: "build -x detekt -x :detekt-cli:runWithArgsFile"
+  TASKS: "build -x :detekt-cli:runWithArgsFile"
 
 jobs:
   Experiment:
@@ -36,6 +36,7 @@ jobs:
           GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
+          gitBranch: ${{ env.GIT_BRANCH }}
           tasks: ${{ env.TASKS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
         if: matrix.experimentId == 1
