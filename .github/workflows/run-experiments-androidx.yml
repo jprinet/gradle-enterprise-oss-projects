@@ -5,8 +5,7 @@ on:
 
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
-  GIT_REPO: "https://github.com/gradle/androidx"
-  GIT_BRANCH: "jprinet/test_93f74b610f3d96f6b7aa00b31da4be55222ca502"
+  GIT_REPO: "https://github.com/androidx/androidx"
   TASKS: "buildOnServer zipTestConfigsWithApks test"
   PROJECT_DIR: "biometric"
   ARGS: "-x ktlint"
@@ -17,9 +16,9 @@ jobs:
     strategy:
       matrix:
         include:
-#          - experimentId: 1
+          - experimentId: 1
           - experimentId: 2
-#          - experimentId: 3
+          - experimentId: 3
 
     runs-on: ubuntu-latest
     steps:
@@ -43,13 +42,18 @@ jobs:
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@actions-stable
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create git hook to disable verification metadata
+        run: |
+          mkdir ~/git-hooks
+          echo -e "#!/bin/bash\nrm -f gradle/verification-metadata.xml\n" > ~/git-hooks/post-checkout
+          chmod +x ~/git-hooks/post-checkout
+          git config --global core.hooksPath ~/git-hooks
       - name: Run experiment 1
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:
           GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
-          gitBranch: ${{ env.GIT_BRANCH }}
           tasks: ${{ env.TASKS }}
           args: ${{ env.ARGS }}
           projectDir: ${{ env.PROJECT_DIR }}
@@ -61,7 +65,6 @@ jobs:
           GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
-          gitBranch: ${{ env.GIT_BRANCH }}
           tasks: ${{ env.TASKS }}
           args: ${{ env.ARGS }}
           projectDir: ${{ env.PROJECT_DIR }}
@@ -74,7 +77,6 @@ jobs:
           GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
-          gitBranch: ${{ env.GIT_BRANCH }}
           tasks: ${{ env.TASKS }}
           args: ${{ env.ARGS }}
           projectDir: ${{ env.PROJECT_DIR }}
