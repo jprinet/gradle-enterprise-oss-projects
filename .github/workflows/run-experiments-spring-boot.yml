@@ -5,8 +5,8 @@ on:
 
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
-  GIT_REPO: "https://github.com/jprinet/spring-boot"
-  GIT_BRANCH: "fix/do_not_cache_asciidoc_tasks"
+  GIT_REPO: "https://github.com/spring-projects/spring-boot"
+  GIT_BRANCH: "main"
   TASKS: "assemble"
   
 
