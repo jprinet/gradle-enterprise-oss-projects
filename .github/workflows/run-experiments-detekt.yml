@@ -6,8 +6,8 @@ on:
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/jprinet/detekt"
-  GIT_BRANCH: "main"
-  TASKS: "build -x detekt"
+  GIT_BRANCH: "fix/circular_dependencies"
+  TASKS: "build -x detekt -x :detekt-cli:runWithArgsFile"
 
 jobs:
   Experiment:
