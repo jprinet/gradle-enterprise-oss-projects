@@ -14,8 +14,8 @@ jobs:
     strategy:
       matrix:
         include:
-#          - experimentId: 1
-#          - experimentId: 2
+          - experimentId: 1
+          - experimentId: 2
           - experimentId: 3
 
     runs-on: ubuntu-latest
@@ -30,13 +30,14 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run experiment 1
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@9d605f5ec7b6b2e4b34fae3723c5b92b9ec7c8b8
         env:
           GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+#          networkSettings: "connect.timeout=PT15S\nread.timeout=PT30s\n"
         if: matrix.experimentId == 1
       - name: Run experiment 2
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-2@actions-stable
