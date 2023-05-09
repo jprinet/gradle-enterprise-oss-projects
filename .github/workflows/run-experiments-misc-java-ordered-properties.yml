@@ -77,6 +77,12 @@ jobs:
           java-version: 11
           distribution: "temurin"
       - name: Validate configuration cache
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/check-configuration-cache-compatibility@e2ecd7429ebf0967f5001564d5abfd7118dd0a81
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-config-cache@f2b0216e05fac7779677997c75d78d012926f417
         with:
-          gradleArgs: "build"
+          tasks: "build"
+          args: "--configuration-cache"
+      - name: Validate configuration cache
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-config-cache@f2b0216e05fac7779677997c75d78d012926f417
+        with:
+          tasks: "build"
+          args: "--configuration-cache"
