@@ -36,6 +36,11 @@ jobs:
         with:
           java-version: "17"
           distribution: "temurin"
+      - name: "Set environment variables"
+        shell: bash
+        run: |
+          set -x
+          echo "DIST_DIR=$HOME/dist" >> $GITHUB_ENV
       - name: Set up Android SDK
         uses: android-actions/setup-android@v2
       - name: Download latest version of the validation scripts
