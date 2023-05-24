@@ -8,7 +8,7 @@ env:
   GIT_REPO: "https://github.com/androidx/androidx"
   TASKS: "buildOnServer zipTestConfigsWithApks test"
   PROJECT_DIR: "biometric"
-  ARGS: "-x ktlint"
+  ARGS: "-x ktlint -Dorg.gradle.dependency.verification=off"
 
 jobs:
   Experiment:
@@ -47,12 +47,6 @@ jobs:
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@actions-stable
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Create git hook to disable verification metadata
-        run: |
-          mkdir ~/git-hooks
-          echo -e "#!/bin/bash\nrm -f gradle/verification-metadata.xml\n" > ~/git-hooks/post-checkout
-          chmod +x ~/git-hooks/post-checkout
-          git config --global core.hooksPath ~/git-hooks
       - name: Run experiment 1
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:
