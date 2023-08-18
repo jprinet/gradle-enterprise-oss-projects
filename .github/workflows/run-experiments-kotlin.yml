@@ -5,8 +5,9 @@ on:
 
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
-  GIT_REPO: "https://github.com/Jetbrains/kotlin"
+  GIT_REPO: "https://github.com/jprinet/kotlin"
   TASKS: "install"
+  GIT_BRANCH: "chore/upgrade-ge-plugins"
   ARGS: "-Pkotlin.test.maxParallelForks=4 -Dorg.gradle.dependency.verification=lenient"
 
 jobs:
@@ -57,6 +58,7 @@ jobs:
           GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
+          gitBranch: ${{ env.GIT_BRANCH }}
           tasks: ${{ env.TASKS }}
           args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
@@ -67,6 +69,7 @@ jobs:
           GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
+          gitBranch: ${{ env.GIT_BRANCH }}
           tasks: ${{ env.TASKS }}
           args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
@@ -78,6 +81,7 @@ jobs:
           GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
+          gitBranch: ${{ env.GIT_BRANCH }}
           tasks: ${{ env.TASKS }}
           args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
