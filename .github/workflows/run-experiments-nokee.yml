@@ -7,7 +7,7 @@ env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/nokeedev/gradle-native"
   GIT_OPTIONS: "--recursive"
-  TASKS: "quickTest -x functionalTestLinuxLatestGlobalAvailable"
+  TASKS: "quickTest --test-dry-run"
 
 jobs:
   Experiment:
