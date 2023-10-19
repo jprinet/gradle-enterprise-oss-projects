@@ -6,7 +6,8 @@ on:
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/detekt/detekt"
-  TASKS: "build -x detekt -PenablePTS=false"
+  TASKS: "build test --test-dry-run -x detekt -PenablePTS=false"
+  ARGS: ""
 
 jobs:
   Experiment:
@@ -36,6 +37,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
         if: matrix.experimentId == 1
       - name: Run experiment 2
@@ -45,6 +47,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
           failIfNotFullyCacheable: false
         if: matrix.experimentId == 2
@@ -55,6 +58,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
+          args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
           failIfNotFullyCacheable: false
         if: matrix.experimentId == 3
