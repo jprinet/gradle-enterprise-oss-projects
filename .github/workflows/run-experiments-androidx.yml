@@ -6,9 +6,11 @@ on:
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/androidx/androidx"
+  GIT_BRANCH: "androidx-main"
   TASKS: "buildOnServer zipTestConfigsWithApks test"
   PROJECT_DIR: "playground-projects/biometric-playground"
   ARGS: "-x ktlint -Dorg.gradle.dependency.verification=off"
+
 
 jobs:
   Experiment:
@@ -47,35 +49,49 @@ jobs:
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@actions-stable
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Run experiment 1
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
-        env:
-          GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
-        with:
-          gitRepo: ${{ env.GIT_REPO }}
-          tasks: ${{ env.TASKS }}
-          args: ${{ env.ARGS }}
-          projectDir: ${{ env.PROJECT_DIR }}
-          gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
-        if: matrix.experimentId == 1
-      - name: Run experiment 2
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-2@actions-stable
-        env:
-          GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
-        with:
-          gitRepo: ${{ env.GIT_REPO }}
-          tasks: ${{ env.TASKS }}
-          args: ${{ env.ARGS }}
-          projectDir: ${{ env.PROJECT_DIR }}
-          gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
-          failIfNotFullyCacheable: true
-        if: matrix.experimentId == 2
+      # resourceDirsOutsideRootProjectDir is not cache relocatable
+      # https://cs.android.com/android-studio/platform/tools/base/+/mirror-goog-studio-main:build-system/gradle-core/src/main/java/com/android/build/gradle/tasks/MergeResources.kt;l=164?q=MergeResources
+      - name: Adjust git hook to temporarily disable caching for MergeResources and DataBindingGenBaseClassesTask on biometric:integration-tests
+        run: |
+          mkdir ~/git-hooks
+          echo -e 'echo "\nproject.getTasks().withType(com.android.build.gradle.tasks.MergeResources).configureEach { outputs.doNotCacheIf(\"MergeResources is not cache relocatable when resourceDirsOutsideRootProjectDir is not empty\") { true } }" >> biometric/integration-tests/testapp/build.gradle\n' > ~/git-hooks/post-checkout
+          echo -e 'echo "\nproject.getTasks().withType(com.android.build.gradle.internal.tasks.databinding.DataBindingGenBaseClassesTask).configureEach { outputs.doNotCacheIf(\"DataBindingGenBaseClassesTask is not cache relocatable when resourceDirsOutsideRootProjectDir is not empty\") { true } }" >> biometric/integration-tests/testapp/build.gradle\n' >> ~/git-hooks/post-checkout
+          chmod +x ~/git-hooks/post-checkout
+          git config --global core.hooksPath ~/git-hooks
+        if: matrix.experimentId == 3
+
+      #      - name: Run experiment 1
+#        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
+#        env:
+#          GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
+#        with:
+#          gitRepo: ${{ env.GIT_REPO }}
+#          gitBranch: ${{ env.GIT_BRANCH }}
+#          tasks: ${{ env.TASKS }}
+#          args: ${{ env.ARGS }}
+#          projectDir: ${{ env.PROJECT_DIR }}
+#          gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+#        if: matrix.experimentId == 1
+#      - name: Run experiment 2
+#        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-2@actions-stable
+#        env:
+#          GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
+#        with:
+#          gitRepo: ${{ env.GIT_REPO }}
+#          gitBranch: ${{ env.GIT_BRANCH }}
+#          tasks: ${{ env.TASKS }}
+#          args: ${{ env.ARGS }}
+#          projectDir: ${{ env.PROJECT_DIR }}
+#          gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+#          failIfNotFullyCacheable: true
+#        if: matrix.experimentId == 2
       - name: Run experiment 3
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@actions-stable
         env:
           GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
+          gitBranch: ${{ env.GIT_BRANCH }}
           tasks: ${{ env.TASKS }}
           args: ${{ env.ARGS }}
           projectDir: ${{ env.PROJECT_DIR }}
