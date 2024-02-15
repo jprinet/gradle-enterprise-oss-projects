@@ -78,7 +78,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run experiment 1
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-1@actions-stable
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-1@e2eb4124bef2e42d0b2c56b7164a1f5d6e51e744
         env:
           GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
         with:
@@ -89,7 +89,7 @@ jobs:
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 1
       - name: Run experiment 2
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-2@actions-stable
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-2@e2eb4124bef2e42d0b2c56b7164a1f5d6e51e744
         env:
           GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
         with:
