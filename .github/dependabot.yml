@@ -22,3 +22,8 @@ updates:
     schedule:
       interval: "daily"
       time: "02:00"
+  - package-ecosystem: "github-actions"
+    directory: "/.github/actions/gradle"
+    schedule:
+      interval: "daily"
+      time: "02:00"
