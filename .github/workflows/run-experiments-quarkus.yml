@@ -5,7 +5,7 @@ on:
 
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
-  GIT_REPO: "https://github.com/quarkusio/quarkus"
+  GIT_REPO: "https://github.com/jprinet/quarkus"
   GIT_BRANCH: "fix/formatter-cache-miss"
   GOALS: "install"
   ARGS: "-B -Dquickly -T2C"
