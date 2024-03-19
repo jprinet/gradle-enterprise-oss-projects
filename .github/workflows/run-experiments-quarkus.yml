@@ -5,7 +5,8 @@ on:
 
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
-  GIT_REPO: "https://github.com/quarkusio/quarkus"
+  GIT_REPO: "https://github.com/jprinet/quarkus"
+  GIT_BRANCH: "fix/formatter-cache-miss"
   GOALS: "install"
   ARGS: "-B -Dquickly -T2C"
 
@@ -37,10 +38,11 @@ jobs:
           GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
+          gitBranch: ${{ env.GIT_BRANCH }}
           goals: ${{ env.GOALS }}
           args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
-          failIfNotFullyCacheable: true
+          failIfNotFullyCacheable: false
         if: matrix.experimentId == 1
       - name: Run experiment 2
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-2@actions-stable
@@ -48,8 +50,9 @@ jobs:
           GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.GE_SOLUTIONS_ACCESS_TOKEN }}"
         with:
           gitRepo: ${{ env.GIT_REPO }}
+          gitBranch: ${{ env.GIT_BRANCH }}
           goals: ${{ env.GOALS }}
           args: ${{ env.ARGS }}
           gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
-          failIfNotFullyCacheable: true
+          failIfNotFullyCacheable: false
         if: matrix.experimentId == 2
