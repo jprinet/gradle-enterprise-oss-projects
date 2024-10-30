@@ -5,7 +5,7 @@ on:
 
 env:
   GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
-  GIT_REPO: "https://github.com/jprinet/androidx"
+  GIT_REPO: "https://github.com/androidx/androidx"
   GIT_BRANCH: "androidx-main"
   TASKS: "buildOnServer zipTestConfigsWithApks test"
   PROJECT_DIR: "playground-projects/biometric-playground"
