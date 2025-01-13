@@ -7,7 +7,7 @@ env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/micronaut-projects/micronaut-core"
   TASKS: "check"
-  ARGS: "-x :http-client:test -x :inject:test -x japiCmp -DpredictiveTestSelection=false"
+  ARGS: "-x :inject:test -x japiCmp -DpredictiveTestSelection=false"
 
 jobs:
   Experiment:
