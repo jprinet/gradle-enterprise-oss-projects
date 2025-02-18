@@ -28,6 +28,12 @@ jobs:
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@actions-stable
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Adjust git hook to configure Gradle project name
+        run: |
+          mkdir ~/git-hooks
+          echo -e 'echo "\nrootProject.name = \"rewrite\"" >> settings.gradle.kts\n' > ~/git-hooks/post-checkout
+          chmod +x ~/git-hooks/post-checkout
+          git config --global core.hooksPath ~/git-hooks
       - name: Run experiment 1
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@actions-stable
         env:
