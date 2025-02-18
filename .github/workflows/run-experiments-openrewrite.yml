@@ -1,11 +1,11 @@
-name: OpenRewrite Concourse
+name: OpenRewrite
 
 on:
   workflow_dispatch:
 
 env:
-  GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
-  GIT_REPO: "https://github.com/openrewrite/rewrite-concourse"
+  DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
+  GIT_REPO: "https://github.com/openrewrite/rewrite"
   TASKS: "build"
 
 jobs:
@@ -35,7 +35,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
-          gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+          gradleEnterpriseUrl: ${{ env.DEVELOCITY_URL }}
         if: matrix.experimentId == 1
       - name: Run experiment 2
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-2@actions-stable
@@ -44,7 +44,7 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
-          gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+          gradleEnterpriseUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 2
       - name: Run experiment 3
@@ -54,6 +54,6 @@ jobs:
         with:
           gitRepo: ${{ env.GIT_REPO }}
           tasks: ${{ env.TASKS }}
-          gradleEnterpriseUrl: ${{ env.GRADLE_ENTERPRISE_URL }}
+          gradleEnterpriseUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 3
