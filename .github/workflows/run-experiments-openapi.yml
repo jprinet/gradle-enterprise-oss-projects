@@ -6,8 +6,8 @@ on:
 env:
     GRADLE_ENTERPRISE_URL: "https://ge.solutions-team.gradle.com"
     GIT_REPO: "https://github.com/OpenAPITools/openapi-generator"
-    GOALS: "package"
-    ARGS: "-B"
+    GOALS: "install"
+    ARGS: "-B -Pjqassistant -Pci-build -DskipITs"
 
 jobs:
     Experiment:
