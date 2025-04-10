@@ -13,6 +13,7 @@ jobs:
   Experiment:
 
     strategy:
+      fail-fast: false
       matrix:
         include:
           - experimentId: 1
@@ -110,6 +111,7 @@ jobs:
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
           testCode: 0
+        if: always()
       - name: Run experiment 2 - 1
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-2@fd4fdad0554b90618e2eb9e73f342579695d187b
         env:
@@ -121,6 +123,7 @@ jobs:
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
           testCode: 1
+        if: always()
       - name: Run experiment 2 - 2
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-2@fd4fdad0554b90618e2eb9e73f342579695d187b
         env:
@@ -132,6 +135,7 @@ jobs:
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
           testCode: 2
+        if: always()
       - name: Run experiment 2 - 3
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-2@fd4fdad0554b90618e2eb9e73f342579695d187b
         env:
@@ -143,6 +147,7 @@ jobs:
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
           testCode: 3
+        if: always()
       - name: Run experiment 2 - 4
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-2@fd4fdad0554b90618e2eb9e73f342579695d187b
         env:
@@ -154,6 +159,7 @@ jobs:
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
           testCode: 4
+        if: always()
       - name: Run experiment 2 - 100
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-2@fd4fdad0554b90618e2eb9e73f342579695d187b
         env:
@@ -165,3 +171,4 @@ jobs:
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
           testCode: 100
+        if: always()
