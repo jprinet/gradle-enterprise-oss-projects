@@ -30,7 +30,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run experiment 1
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@8d29d063790dc8ed7326dbb5c681d8f5892212d7
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-1@1674631b1254c3e4e35533229dceb979b32c4423
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
           GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
@@ -40,7 +40,7 @@ jobs:
           develocityUrl: ${{ env.DEVELOCITY_URL }}
         if: matrix.experimentId == 1
       - name: Run experiment 2
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-2@8d29d063790dc8ed7326dbb5c681d8f5892212d7
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-2@1674631b1254c3e4e35533229dceb979b32c4423
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
           GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
@@ -51,7 +51,7 @@ jobs:
           failIfNotFullyCacheable: true
         if: matrix.experimentId == 2
       - name: Run experiment 3
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@8d29d063790dc8ed7326dbb5c681d8f5892212d7
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@1674631b1254c3e4e35533229dceb979b32c4423
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
           GRADLE_ENTERPRISE_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"

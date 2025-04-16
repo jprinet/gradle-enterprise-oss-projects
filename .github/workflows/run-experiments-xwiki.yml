@@ -148,7 +148,7 @@ jobs:
           testCode: 3
         if: always()
       - name: Run experiment 2 - 4
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-2@f380d005e51d664930b74d9152a7cfb157f122d1
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-2@1674631b1254c3e4e35533229dceb979b32c4423
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
@@ -160,7 +160,7 @@ jobs:
           testCode: 4
         if: always()
       - name: Run experiment 2 - 100
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-2@f380d005e51d664930b74d9152a7cfb157f122d1
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-2@1674631b1254c3e4e35533229dceb979b32c4423
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
