@@ -27,11 +27,11 @@ jobs:
           java-version: 21
           distribution: "temurin"
       - name: Download latest version of the validation scripts
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@1674631b1254c3e4e35533229dceb979b32c4423
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@fd3a175265f052701b401f7467c086c13067f59b
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run experiment 1
-        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@aabcb835bed8e668113f2aebbc2324fa4aa65aad
+        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-1@fd3a175265f052701b401f7467c086c13067f59b
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
@@ -41,7 +41,7 @@ jobs:
         if: matrix.experimentId == 1
       - name: Run experiment 2
         id: run2
-        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-2@aabcb835bed8e668113f2aebbc2324fa4aa65aad
+        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-2@fd3a175265f052701b401f7467c086c13067f59b
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
@@ -51,7 +51,7 @@ jobs:
           failIfNotFullyCacheable: false
         if: matrix.experimentId == 2
       - name: Run experiment 3
-        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-3@aabcb835bed8e668113f2aebbc2324fa4aa65aad
+        uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-3@fd3a175265f052701b401f7467c086c13067f59b
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
