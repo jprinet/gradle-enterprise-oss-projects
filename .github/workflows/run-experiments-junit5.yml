@@ -40,7 +40,7 @@ jobs:
           develocityUrl: ${{ env.DEVELOCITY_URL }}
         if: matrix.experimentId == 1
       - name: Run experiment 2
-        id: run
+        id: run2
         uses: gradle/develocity-build-validation-scripts/.github/actions/gradle/experiment-2@aabcb835bed8e668113f2aebbc2324fa4aa65aad
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
@@ -64,5 +64,5 @@ jobs:
         id: run
         if: always()
         run: |
-          echo "1st build = ${{ steps.run.outputs.buildScanFirstBuild }}"
-          echo "2nd build = ${{ steps.run.outputs.buildScanSecondBuild }}"
+          echo "1st build = ${{ steps.run2.outputs.buildScanFirstBuild }}"
+          echo "2nd build = ${{ steps.run2.outputs.buildScanSecondBuild }}"
