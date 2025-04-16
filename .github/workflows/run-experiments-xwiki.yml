@@ -6,7 +6,7 @@ on:
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/xwiki/xwiki-commons"
-  GOALS: "clean"
+  GOALS: "validate"
   ARGS: "-B"
 
 jobs:
