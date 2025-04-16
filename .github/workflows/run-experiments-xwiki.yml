@@ -17,6 +17,7 @@ jobs:
       matrix:
         include:
           - experimentId: 1
+          - experimentId: 2
 
     runs-on: ubuntu-latest
     steps:
@@ -78,6 +79,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run experiment 1
+        id: run
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-1@aabcb835bed8e668113f2aebbc2324fa4aa65aad
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
