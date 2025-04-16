@@ -68,7 +68,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out project
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: "etiennestuder/java-ordered-properties"
       - name: Set up JDK 11
