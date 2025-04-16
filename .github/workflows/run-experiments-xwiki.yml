@@ -6,7 +6,7 @@ on:
 env:
   DEVELOCITY_URL: "https://ge.solutions-team.gradle.com"
   GIT_REPO: "https://github.com/xwiki/xwiki-commons"
-  GOALS: "install"
+  GOALS: "clean"
   ARGS: "-B"
 
 jobs:
@@ -77,19 +77,8 @@ jobs:
         uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/download@actions-stable
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-#      - name: Run experiment 1
-#        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-1@8d29d063790dc8ed7326dbb5c681d8f5892212d7
-#        env:
-#          DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
-#        with:
-#          gitRepo: ${{ env.GIT_REPO }}
-#          goals: ${{ env.GOALS }}
-#          args: ${{ env.ARGS }}
-#          develocityUrl: ${{ env.DEVELOCITY_URL }}
-#          failIfNotFullyCacheable: true
-#        if: matrix.experimentId == 1
-      - name: Run experiment 2 - 0
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-2@f380d005e51d664930b74d9152a7cfb157f122d1
+      - name: Run experiment 1
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-1@aabcb835bed8e668113f2aebbc2324fa4aa65aad
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
@@ -98,9 +87,9 @@ jobs:
           args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
-#        if: matrix.experimentId == 2
-      - name: Run experiment 2 - 0
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-2@f380d005e51d664930b74d9152a7cfb157f122d1
+        if: matrix.experimentId == 1
+      - name: Run experiment 2
+        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-2@aabcb835bed8e668113f2aebbc2324fa4aa65aad
         env:
           DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
         with:
@@ -109,65 +98,10 @@ jobs:
           args: ${{ env.ARGS }}
           develocityUrl: ${{ env.DEVELOCITY_URL }}
           failIfNotFullyCacheable: true
-          testCode: 0
+        if: matrix.experimentId == 2
+      - name: Fill GitHub summary and outputs
+        id: run
         if: always()
-      - name: Run experiment 2 - 1
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-2@f380d005e51d664930b74d9152a7cfb157f122d1
-        env:
-          DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
-        with:
-          gitRepo: ${{ env.GIT_REPO }}
-          goals: ${{ env.GOALS }}
-          args: ${{ env.ARGS }}
-          develocityUrl: ${{ env.DEVELOCITY_URL }}
-          failIfNotFullyCacheable: true
-          testCode: 1
-        if: always()
-      - name: Run experiment 2 - 2
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-2@f380d005e51d664930b74d9152a7cfb157f122d1
-        env:
-          DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
-        with:
-          gitRepo: ${{ env.GIT_REPO }}
-          goals: ${{ env.GOALS }}
-          args: ${{ env.ARGS }}
-          develocityUrl: ${{ env.DEVELOCITY_URL }}
-          failIfNotFullyCacheable: true
-          testCode: 2
-        if: always()
-      - name: Run experiment 2 - 3
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-2@f380d005e51d664930b74d9152a7cfb157f122d1
-        env:
-          DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
-        with:
-          gitRepo: ${{ env.GIT_REPO }}
-          goals: ${{ env.GOALS }}
-          args: ${{ env.ARGS }}
-          develocityUrl: ${{ env.DEVELOCITY_URL }}
-          failIfNotFullyCacheable: true
-          testCode: 3
-        if: always()
-      - name: Run experiment 2 - 4
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-2@1674631b1254c3e4e35533229dceb979b32c4423
-        env:
-          DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
-        with:
-          gitRepo: ${{ env.GIT_REPO }}
-          goals: ${{ env.GOALS }}
-          args: ${{ env.ARGS }}
-          develocityUrl: ${{ env.DEVELOCITY_URL }}
-          failIfNotFullyCacheable: true
-          testCode: 4
-        if: always()
-      - name: Run experiment 2 - 100
-        uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/maven/experiment-2@1674631b1254c3e4e35533229dceb979b32c4423
-        env:
-          DEVELOCITY_ACCESS_KEY: "${{ secrets.DV_SOLUTIONS_ACCESS_KEY }}"
-        with:
-          gitRepo: ${{ env.GIT_REPO }}
-          goals: ${{ env.GOALS }}
-          args: ${{ env.ARGS }}
-          develocityUrl: ${{ env.DEVELOCITY_URL }}
-          failIfNotFullyCacheable: true
-          testCode: 100
-        if: always()
+        run: |
+          echo "1st build = ${{ steps.run.outputs.buildScanFirstBuild }}"
+          echo "2nd build = ${{ steps.run.outputs.buildScanSecondBuild }}"
